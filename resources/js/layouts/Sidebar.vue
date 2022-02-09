@@ -190,19 +190,17 @@ export default {
         ...mapState(["auth"])
     },
     methods: {
-        //KETIKA TOMBOL LOGOUT DITEKAN, FUNGSI INI DIJALANKAN
         ...mapMutations(["CLEAR_USERS"]),
         logout() {
             return new Promise((resolve, reject) => {
-                localStorage.removeItem("token"); //MENGHAPUS TOKEN DARI LOCALSTORAGE
-                localStorage.removeItem("auth"); //MENGHAPUS auth DARI LOCALSTORAGE
+                localStorage.removeItem("token");
+                localStorage.removeItem("auth");
                 resolve();
             }).then(() => {
-                //MEMPERBAHARUI STATE TOKEN
                 this.$store.state.token = localStorage.getItem("token");
                 this.$store.state.authuser = localStorage.getItem("auth");
                 this.$store.commit("user/CLEAR_USERS");
-                this.$router.push("/login"); //REDIRECT KE PAGE LOGIN
+                this.$router.push("/login");
             });
         }
     }

@@ -128,7 +128,6 @@
     </div>
 </template>
 
-<!-- JAVASCRIPT SECTION -->
 <script>
 import { mapActions, mapMutations, mapGetters, mapState } from "vuex";
 export default {
@@ -142,22 +141,18 @@ export default {
             }
         };
     },
-    //SEBELUM COMPONENT DI-RENDER
     created() {
-        //KITA MELAKUKAN PENGECEKAN JIKA SUDAH LOGIN DIMANA VALUE isAuth BERNILAI TRUE
         if (this.isAuth) {
-            //MAKA DI-DIRECT KE ROUTE DENGAN NAME home
             this.$router.push({ name: "home" });
         }
     },
     computed: {
-        ...mapGetters(["isAuth"]), //MENGAMBIL GETTERS isAuth DARI VUEX
+        ...mapGetters(["isAuth"]),
         ...mapState(["errors"])
     },
     methods: {
-        ...mapActions("auth", ["submit"]), //MENGISIASI FUNGSI submit() DARI VUEX AGAR DAPAT DIGUNAKAN PADA COMPONENT TERKAIT. submit() BERASAL DARI ACTION PADA FOLDER STORES/auth.js
+        ...mapActions("auth", ["submit"]),
         ...mapMutations(["CLEAR_ERRORS"]),
-
         postLogin() {
             this.loadingPage = 1;
             this.submit(this.data).then(() => {

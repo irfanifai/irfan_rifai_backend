@@ -274,7 +274,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["errors"]), //MENGAMBIL STATE ERRORS
+        ...mapState(["errors"]),
         ...mapState("user", {
             user: state => state.user
         })
@@ -283,10 +283,8 @@ export default {
         this.doLoading(1);
     },
     methods: {
-        //VUEX
         ...mapMutations("user", ["CLEAR_FORM"]),
         ...mapActions("user", ["editUser", "updateUser", "removeUser"]),
-        //SWAL
         alert(text, tipe) {
             if (tipe === 1) {
                 this.$swal({
@@ -326,7 +324,6 @@ export default {
                 });
             }
         },
-        //METHOD
         doLoading(type) {
             this.loadingPage = type;
             setTimeout(() => {
@@ -356,7 +353,6 @@ export default {
             });
         },
         deleteData() {
-            //AKAN MENAMPILKAN JENDELA KONFIRMASI
             this.$swal({
                 title: "Are you sure ?",
                 text: "Deleted data cannot be recovery",
@@ -381,7 +377,6 @@ export default {
         }
     },
     destroyed() {
-        //FORM DI BERSIHKAN
         this.CLEAR_FORM();
     }
 };

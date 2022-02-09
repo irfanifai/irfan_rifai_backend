@@ -314,7 +314,6 @@ export default {
         }
     },
     destroyed() {
-        //FORM DI BERSIHKAN
         this.CLEAR_FORM();
     }
 };

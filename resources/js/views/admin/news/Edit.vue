@@ -6,11 +6,20 @@
                 <div
                     class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
                 >
-                    <h1 class="flex-sm-fill h3 my-2">Administrator : Create News</h1>
-                    <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <h1 class="flex-sm-fill h3 my-2">
+                        Administrator : Create News
+                    </h1>
+                    <nav
+                        class="flex-sm-00-auto ml-sm-3"
+                        aria-label="breadcrumb"
+                    >
                         <ol class="breadcrumb breadcrumb-alt">
                             <li class="breadcrumb-item" aria-current="page">
-                                <router-link class="link-fx" :to="{ name: 'news' }">News</router-link>
+                                <router-link
+                                    class="link-fx"
+                                    :to="{ name: 'news' }"
+                                    >News</router-link
+                                >
                             </li>
                             <li class="breadcrumb-item">Create News</li>
                         </ol>
@@ -24,27 +33,39 @@
         <div class="content">
             <!--Loading-->
             <div class="block" v-if="loadingPage == 1" style="height:200px">
-                <div class="block-content block-content-full pb-0" style="padding-top: 80px">
+                <div
+                    class="block-content block-content-full pb-0"
+                    style="padding-top: 80px"
+                >
                     <div
                         class="spinner-border spinner-border-lg text-info mx-auto"
                         role="status"
                         style="display: flex;
                         justify-content: center;"
-                    >
-                    </div>
-                    <center class="mt-2"><span class="text-center" style="opacity:0.7">Loading</span></center>
+                    ></div>
+                    <center class="mt-2">
+                        <span class="text-center" style="opacity:0.7"
+                            >Loading</span
+                        >
+                    </center>
                 </div>
             </div>
-                        <div class="block" v-if="loadingPage == 2" style="height:200px">
-                <div class="block-content block-content-full pb-0" style="padding-top: 80px">
+            <div class="block" v-if="loadingPage == 2" style="height:200px">
+                <div
+                    class="block-content block-content-full pb-0"
+                    style="padding-top: 80px"
+                >
                     <div
                         class="spinner-border spinner-border-lg text-info mx-auto"
                         role="status"
                         style="display: flex;
                         justify-content: center;"
-                    >
-                    </div>
-                    <center class="mt-2"><span class="text-center" style="opacity:0.7">Save Data</span></center>
+                    ></div>
+                    <center class="mt-2">
+                        <span class="text-center" style="opacity:0.7"
+                            >Save Data</span
+                        >
+                    </center>
                 </div>
             </div>
             <!-- Basic -->
@@ -59,20 +80,40 @@
                         <!--Form-->
                         <div class="row font-size-sm">
                             <div class="col-12">
-                                <div class="form-group" >
-                                    <label for="example-text-input">News Title</label>
+                                <div class="form-group">
+                                    <label for="example-text-input"
+                                        >News Title</label
+                                    >
                                     <input
                                         type="text"
                                         class="form-control"
                                         v-model="news.news_title"
-                                        :class="{ 'is-invalid': errors.news_title }"
+                                        :class="{
+                                            'is-invalid': errors.news_title
+                                        }"
                                     />
-                                    <p class="text-danger" v-if="errors.news_title">{{ errors.news_title[0] }}</p>
+                                    <p
+                                        class="text-danger"
+                                        v-if="errors.news_title"
+                                    >
+                                        {{ errors.news_title[0] }}
+                                    </p>
                                 </div>
-                                <div class="form-group" >
-                                    <label for="example-text-input">News Content</label>
-                                    <ckeditor tag-name="textarea" :editor="editor" v-model="news.news_content"></ckeditor>
-                                    <p class="text-danger" v-if="errors.news_content">{{ errors.news_content[0] }}</p>
+                                <div class="form-group">
+                                    <label for="example-text-input"
+                                        >News Content</label
+                                    >
+                                    <ckeditor
+                                        tag-name="textarea"
+                                        :editor="editor"
+                                        v-model="news.news_content"
+                                    ></ckeditor>
+                                    <p
+                                        class="text-danger"
+                                        v-if="errors.news_content"
+                                    >
+                                        {{ errors.news_content[0] }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -80,9 +121,10 @@
                         <!-- Submit -->
                         <div class="row items-push">
                             <div class="col-12 text-center">
-                                <p
-                                    class="font-size-sm text-muted"
-                                >* Required filled, Make sure all data is correctly filled</p>
+                                <p class="font-size-sm text-muted">
+                                    * Required filled, Make sure all data is
+                                    correctly filled
+                                </p>
                                 <button
                                     type="submit"
                                     class="btn btn-sm btn-success"
@@ -97,16 +139,18 @@
                                     v-ripple="{ center: true }"
                                     @click.prevent="deleteData"
                                 >
-                                    <i class="fa fa-fw fa-trash mr-1"></i> Delete
+                                    <i class="fa fa-fw fa-trash mr-1"></i>
+                                    Delete
                                 </button>
                                 <router-link
                                     type="button"
                                     class="btn btn-sm btn-alt-light"
                                     tag="button"
                                     v-ripple="{ center: true }"
-                                    :to="{name: 'news'}"
+                                    :to="{ name: 'news' }"
                                 >
-                                    <i class="fa fa-fw fa-times mr-1"></i> Cancel
+                                    <i class="fa fa-fw fa-times mr-1"></i>
+                                    Cancel
                                 </router-link>
                             </div>
                         </div>
@@ -121,30 +165,29 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { mapActions, mapState, mapMutations } from "vuex";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export default {
     name: "edit-news",
 
-    created(){
-        if(this.$route.params.id){
-            this.editNews(this.$route.params.id)
-        }else{
-            this.$router.push({ name: 'news' })
+    created() {
+        if (this.$route.params.id) {
+            this.editNews(this.$route.params.id);
+        } else {
+            this.$router.push({ name: "news" });
             this.alert("Data not found, select data first", 2);
-
         }
     },
     data() {
         return {
             loadingPage: 1,
-            editor: ClassicEditor,
+            editor: ClassicEditor
         };
     },
     computed: {
-        ...mapState(['errors']), //MENGAMBIL STATE ERRORS
-        ...mapState('news', {
+        ...mapState(["errors"]),
+        ...mapState("news", {
             news: state => state.news
         })
     },
@@ -152,10 +195,8 @@ export default {
         this.doLoading(1);
     },
     methods: {
-        //VUEX
-        ...mapMutations('news', ['CLEAR_FORM']), 
-        ...mapActions('news', ['editNews', 'updateNews','removeNews']),
-        //SWAL
+        ...mapMutations("news", ["CLEAR_FORM"]),
+        ...mapActions("news", ["editNews", "updateNews", "removeNews"]),
         alert(text, tipe) {
             if (tipe === 1) {
                 this.$swal({
@@ -205,13 +246,12 @@ export default {
         submitData() {
             this.doLoading(2);
             this.updateNews(this.$route.params.id).then(() => {
-                this.$router.push({ name: 'news' })
-                this.alert("Successfully Edit News Data",1 );
+                this.$router.push({ name: "news" });
+                this.alert("Successfully Edit News Data", 1);
                 this.loadingPage = 0;
-            })
+            });
         },
         deleteData() {
-            //AKAN MENAMPILKAN JENDELA KONFIRMASI
             this.$swal({
                 title: "Are you sure ?",
                 text: "Deleted data cannot be recovery",
@@ -220,22 +260,23 @@ export default {
                 dangerMode: true
             }).then(willDelete => {
                 if (willDelete) {
-                    this.removeNews(this.$route.params.id).then(() => {
-                        this.$router.push({ name: 'news' })
-                        this.alert("Data has been deleted !", 1);
-                        this.loadingPage = 0;
-                    }).catch((error) => {
-                        if (error) {
-                            console.log(error)
-                        }
-                    })
+                    this.removeNews(this.$route.params.id)
+                        .then(() => {
+                            this.$router.push({ name: "news" });
+                            this.alert("Data has been deleted !", 1);
+                            this.loadingPage = 0;
+                        })
+                        .catch(error => {
+                            if (error) {
+                                console.log(error);
+                            }
+                        });
                 }
             });
         }
     },
     destroyed() {
-        //FORM DI BERSIHKAN
-        this.CLEAR_FORM()
+        this.CLEAR_FORM();
     }
 };
 </script>

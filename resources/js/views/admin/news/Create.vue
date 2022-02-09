@@ -176,7 +176,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["errors"]), //MENGAMBIL STATE ERRORS
+        ...mapState(["errors"]),
         ...mapState("news", {
             news: state => state.news
         })
@@ -202,7 +202,6 @@ export default {
         }
     },
     destroyed() {
-        //FORM DI BERSIHKAN
         this.CLEAR_FORM();
     }
 };
