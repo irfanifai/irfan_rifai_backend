@@ -17,12 +17,11 @@ class News extends Model
         'news_title',
         'news_content',
         'news_username',
-        'client_token',
+        'photo',
         'created_at'
     ];
 
     protected $hidden = [
-        'client_token',
         'updated_at',
     ];
 

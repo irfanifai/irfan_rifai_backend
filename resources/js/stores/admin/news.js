@@ -5,6 +5,7 @@ const state = () => ({
     news: {
         news_title: "",
         news_content: "",
+        photo: ""
     },
     page: 1,
     rows: 20,
@@ -25,12 +26,14 @@ const mutations = {
         state.news = {
             news_title: payload.news_title,
             news_content: payload.news_content,
+            photo: payload.photo,
         }
     },
     CLEAR_FORM(state) {
         state.news = {
             news_title: "",
             news_content: "",
+            photo: ""
         }
     },
     CLEAR_NEWSALL(state) {

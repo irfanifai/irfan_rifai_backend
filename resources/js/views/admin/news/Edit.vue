@@ -7,7 +7,7 @@
                     class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
                 >
                     <h1 class="flex-sm-fill h3 my-2">
-                        Administrator : Create News
+                        Administrator : Edit News
                     </h1>
                     <nav
                         class="flex-sm-00-auto ml-sm-3"
@@ -21,7 +21,7 @@
                                     >News</router-link
                                 >
                             </li>
-                            <li class="breadcrumb-item">Create News</li>
+                            <li class="breadcrumb-item">Edit News</li>
                         </ol>
                     </nav>
                 </div>
@@ -97,6 +97,35 @@
                                         v-if="errors.news_title"
                                     >
                                         {{ errors.news_title[0] }}
+                                    </p>
+                                </div>
+                                <div class="form-group" v-if="news.photo">
+                                    <label for="example-text-input"
+                                        >Foto</label
+                                    >
+                                    <img
+                                        :src="'/storage/news/' + news.photo"
+                                        alt="foto"
+                                        class="img-thumbnail"
+                                        style="
+                                            width: 200px;
+                                            height: 200px;
+                                            object-fit: cover;
+                                        "
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label class="d-block" for="user-photo"
+                                        >Upload Photo</label
+                                    >
+                                    <input
+                                        type="file"
+                                        id="user-photo"
+                                        @change="uploadImage"
+                                        :class="{ 'is-invalid': errors.photo }"
+                                    />
+                                    <p class="text-danger" v-if="errors.photo">
+                                        {{ errors.photo[0] }}
                                     </p>
                                 </div>
                                 <div class="form-group">
@@ -197,51 +226,19 @@ export default {
     methods: {
         ...mapMutations("news", ["CLEAR_FORM"]),
         ...mapActions("news", ["editNews", "updateNews", "removeNews"]),
-        alert(text, tipe) {
-            if (tipe === 1) {
-                this.$swal({
-                    title: "Succes",
-                    text: text,
-                    icon: "success"
-                });
-            } else if (tipe === 2) {
-                this.$swal({
-                    title: "Something Wrong",
-                    text: text,
-                    icon: "error"
-                });
-            } else if (tipe === 3) {
-                this.$swal({
-                    title: "Are you sure ?",
-                    text: text,
-                    icon: "warning",
-                    buttons: ["Cancel", "Delete"],
-                    dangerMode: true
-                }).then(willDelete => {
-                    if (willDelete) {
-                        this.alert("Data has been deleted !", 1);
-                    }
-                });
-            } else if (tipe === 4) {
-                this.$swal({
-                    title: "Are you sure ?",
-                    text: text,
-                    icon: "warning",
-                    buttons: ["Cancel", "Update"],
-                    dangerMode: false
-                }).then(willDelete => {
-                    if (willDelete) {
-                        this.alert("Data has been deleted !", 1);
-                    }
-                });
-            }
-        },
-        //METHOD
         doLoading(type) {
             this.loadingPage = type;
             setTimeout(() => {
                 this.loadingPage = 0;
             }, 400);
+        },
+        uploadImage(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            reader.onloadend = file => {
+                this.news.photo = reader.result;
+            };
+            reader.readAsDataURL(file);
         },
         submitData() {
             this.doLoading(2);

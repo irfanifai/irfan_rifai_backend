@@ -16,7 +16,7 @@ class NewsController extends Controller
     public function __construct()
     {
         //DEFINISIKAN PATH
-        $this->path = storage_path('app/public/avatar/');
+        $this->path = storage_path('app/public/news/');
     }
 
     public function index()
@@ -36,12 +36,17 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'news_title' => 'required|string',
             'news_content' => 'required|string',
         ]);
 
+        //PHOTO UPLOAD
+        $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+        \Image::make($request->photo)->save($this->path.$name);
         $request->merge([
+            'photo' => $name,
             'news_username' => Auth::user()->username,
         ]);
 
@@ -63,6 +68,14 @@ class NewsController extends Controller
             'news_title' => 'required|string',
             'news_content' => 'required|string',
         ]);
+
+
+        //PHOTO UPLOAD
+        if ($request->photo != $news->photo) {
+            $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+            \Image::make($request->photo)->save($this->path.$name);
+            $request->merge(['photo' => $name]);
+        }
 
         $news->update($request->all());
         return response()->json(['status' => 'success'], 200);

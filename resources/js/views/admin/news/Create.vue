@@ -108,6 +108,20 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
+                                    <label class="d-block" for="user-photo"
+                                        >Upload Photo</label
+                                    >
+                                    <input
+                                        type="file"
+                                        id="user-photo"
+                                        @change="uploadImage"
+                                        :class="{ 'is-invalid': errors.photo }"
+                                    />
+                                    <p class="text-danger" v-if="errors.photo">
+                                        {{ errors.photo[0] }}
+                                    </p>
+                                </div>
+                                <div class="form-group">
                                     <label for="example-text-input"
                                         >News Content</label
                                     >
@@ -171,7 +185,7 @@ export default {
 
     data() {
         return {
-            loadingPage: 0,
+            loadingPage: 1,
             editor: ClassicEditor
         };
     },
@@ -181,24 +195,32 @@ export default {
             news: state => state.news
         })
     },
+    mounted() {
+        this.doLoading(0);
+    },
     methods: {
-        //VUEX
         ...mapMutations("news", ["CLEAR_FORM"]),
         ...mapActions("news", ["submitNews"]),
-
-        //METHOD
+        doLoading(type) {
+            this.loadingPage = type;
+            setTimeout(() => {
+                this.loadingPage = 0;
+            }, 500);
+        },
+        uploadImage(e) {
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            reader.onloadend = file => {
+                this.news.photo = reader.result;
+            };
+            reader.readAsDataURL(file);
+        },
         submit() {
-            this.loadingPage = 2;
-            this.submitNews()
-                .then(() => {
-                    this.$router.push({ name: "news" });
-                    this.alert("Successfully create News Data ", 1);
-                    this.loadingPage = 0;
-                })
-                .catch(error => {
-                    console.log(error);
-                    this.loadingPage = 0;
-                });
+            this.doLoading(2);
+            this.submitNews().then(() => {
+                this.$router.push({ name: "news" });
+                this.alert("Successfully create News Data ", 1);
+            });
         }
     },
     destroyed() {
