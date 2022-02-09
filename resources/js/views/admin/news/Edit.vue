@@ -102,7 +102,7 @@
                                 <div class="form-group" v-if="news.photo">
                                     <label for="example-text-input"
                                         >Foto</label
-                                    >
+                                    ><br>
                                     <img
                                         :src="'/storage/news/' + news.photo"
                                         alt="foto"
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="d-block" for="user-photo"
-                                        >Upload Photo</label
+                                        >Upload Photo Baru</label
                                     >
                                     <input
                                         type="file"
