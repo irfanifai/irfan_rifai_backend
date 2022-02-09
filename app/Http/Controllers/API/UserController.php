@@ -21,12 +21,12 @@ class UserController extends Controller
 
     public function index()
     {
+        // dd(Auth::user()->client_token);
         $users = User::where('client_token', Auth::user()->client_token);
         if (request()->search != '') {
             $users = $users->where(function ($query) {
                 return $query->where('name', 'LIKE', '%' . request()->search . '%')
                 ->orWhere('email', 'LIKE', '%' . request()->search . '%')
-                ->orWhere('phone', 'LIKE', '%' . request()->search . '%')
                 ->orWhere('username', 'LIKE', '%' . request()->search . '%');
             });
         }
@@ -43,7 +43,6 @@ class UserController extends Controller
             'name' => 'required',
             'username' => 'required|string|unique:users,username',
             'email' => 'required|string|unique:users,email',
-            'phone' => 'required',
             'photo' => 'required',
             'password' => 'required'
         ]);
@@ -52,7 +51,7 @@ class UserController extends Controller
 
         //PHOTO UPLOAD
         $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
-        \Image::make($request->photo)->save($this->path.$name);
+        // \Image::make($request->photo)->save($this->path.$name);
         $request->merge([
             'photo' => $name,
             'client_token' => Auth::user()->client_token
@@ -76,7 +75,6 @@ class UserController extends Controller
             'name' => 'required',
             'username' => 'required|string|unique:users,username,'.$user->id,
             'email' => 'required|string|unique:users,email,'.$user->id,
-            'phone' => 'required',
         ]);
         //PASSWORD HASH
         if($request['password']){
@@ -100,5 +98,5 @@ class UserController extends Controller
         $user->delete();
         return response()->json(['status' => 'success'], 200);
     }
-    
+
 }

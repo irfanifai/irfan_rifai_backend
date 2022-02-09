@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Aurora App</title>
+    <title>Wafa</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Icons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-    <link rel="shortcut icon" href="{{ asset('media/favicons/think-peaks-brands.svg') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('media/favicons/favicon-192x192.png')}}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('media/favicons/apple-touch-icon-180x180.png')}}">
+    <link rel="shortcut icon" href="{{ asset('media/favicons/favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{asset('media/favicons/android-chrome-192x192.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('media/favicons/apple-touch-icon.png')}}">
     <!-- END Icons -->
 
     <!-- Stylesheets -->
@@ -30,11 +30,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{ asset('js/oneui.core.min.js') }}"></script>
     <script src="{{ asset('js/oneui.app.min.js') }}"></script>
-
-    
-    <!-- Page JS Code -->
-    {{-- <script src="{{ asset('js/pages/be_tables_datatables.min.js') }}"></script> --}}
-    {{-- <script src="{{asset('js/pages/be_pages_dashboard.min.js')}}"></script> --}}
 
 </body>
 </html>

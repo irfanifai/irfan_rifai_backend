@@ -6,11 +6,20 @@
                 <div
                     class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
                 >
-                    <h1 class="flex-sm-fill h3 my-2">Administrator : Create User</h1>
-                    <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <h1 class="flex-sm-fill h3 my-2">
+                        Administrator : Create User
+                    </h1>
+                    <nav
+                        class="flex-sm-00-auto ml-sm-3"
+                        aria-label="breadcrumb"
+                    >
                         <ol class="breadcrumb breadcrumb-alt">
                             <li class="breadcrumb-item" aria-current="page">
-                                <router-link class="link-fx" :to="{ name: 'user' }">User</router-link>
+                                <router-link
+                                    class="link-fx"
+                                    :to="{ name: 'user' }"
+                                    >User</router-link
+                                >
                             </li>
                             <li class="breadcrumb-item">Create User</li>
                         </ol>
@@ -24,27 +33,39 @@
         <div class="content">
             <!--Loading-->
             <div class="block" v-if="loadingPage == 1" style="height:200px">
-                <div class="block-content block-content-full pb-0" style="padding-top: 80px">
+                <div
+                    class="block-content block-content-full pb-0"
+                    style="padding-top: 80px"
+                >
                     <div
                         class="spinner-border spinner-border-lg text-info mx-auto"
                         role="status"
                         style="display: flex;
                         justify-content: center;"
-                    >
-                    </div>
-                    <center class="mt-2"><span class="text-center" style="opacity:0.7">Loading</span></center>
+                    ></div>
+                    <center class="mt-2">
+                        <span class="text-center" style="opacity:0.7"
+                            >Loading</span
+                        >
+                    </center>
                 </div>
             </div>
-                        <div class="block" v-if="loadingPage == 2" style="height:200px">
-                <div class="block-content block-content-full pb-0" style="padding-top: 80px">
+            <div class="block" v-if="loadingPage == 2" style="height:200px">
+                <div
+                    class="block-content block-content-full pb-0"
+                    style="padding-top: 80px"
+                >
                     <div
                         class="spinner-border spinner-border-lg text-info mx-auto"
                         role="status"
                         style="display: flex;
                         justify-content: center;"
-                    >
-                    </div>
-                    <center class="mt-2"><span class="text-center" style="opacity:0.7">Save Data</span></center>
+                    ></div>
+                    <center class="mt-2">
+                        <span class="text-center" style="opacity:0.7"
+                            >Save Data</span
+                        >
+                    </center>
                 </div>
             </div>
             <!-- Basic -->
@@ -59,8 +80,10 @@
                         <!--Form-->
                         <div class="row push font-size-sm">
                             <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                                <div class="form-group" >
-                                    <label for="example-text-input">Fullname</label>
+                                <div class="form-group">
+                                    <label for="example-text-input"
+                                        >Fullname</label
+                                    >
                                     <input
                                         type="text"
                                         class="form-control"
@@ -68,22 +91,35 @@
                                         v-model="user.name"
                                         :class="{ 'is-invalid': errors.name }"
                                     />
-                                    <p class="text-danger" v-if="errors.name">{{ errors.name[0] }}</p>
+                                    <p class="text-danger" v-if="errors.name">
+                                        {{ errors.name[0] }}
+                                    </p>
                                 </div>
-                                <div class="form-group" >
-                                    <label for="example-text-input">Username</label>
+                                <div class="form-group">
+                                    <label for="example-text-input"
+                                        >Username</label
+                                    >
                                     <input
                                         type="text"
                                         class="form-control"
                                         placeholder="Username"
                                         v-model="user.username"
                                         @keydown.space.prevent
-                                        :class="{ 'is-invalid': errors.username }"
+                                        :class="{
+                                            'is-invalid': errors.username
+                                        }"
                                     />
-                                    <p class="text-danger" v-if="errors.username">{{ errors.username[0] }}</p>
+                                    <p
+                                        class="text-danger"
+                                        v-if="errors.username"
+                                    >
+                                        {{ errors.username[0] }}
+                                    </p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="example-email-input">Email</label>
+                                    <label for="example-email-input"
+                                        >Email</label
+                                    >
                                     <input
                                         type="email"
                                         class="form-control"
@@ -91,354 +127,64 @@
                                         v-model="user.email"
                                         :class="{ 'is-invalid': errors.email }"
                                     />
-                                    <p class="text-danger" v-if="errors.email">{{ errors.email[0] }}</p>
+                                    <p class="text-danger" v-if="errors.email">
+                                        {{ errors.email[0] }}
+                                    </p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="example-password-input">Phone Number</label>
+                                    <label class="d-block" for="user-photo"
+                                        >Photo</label
+                                    >
                                     <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Phone Number"
-                                        v-model="user.phone"
-                                        :class="{ 'is-invalid': errors.phone }"
+                                        type="file"
+                                        id="user-photo"
+                                        @change="uploadImage"
+                                        :class="{ 'is-invalid': errors.photo }"
                                     />
-                                    <p class="text-danger" v-if="errors.phone">{{ errors.phone[0] }}</p>
+                                    <p class="text-danger" v-if="errors.photo">
+                                        {{ errors.photo[0] }}
+                                    </p>
                                 </div>
                                 <div class="form-group">
-                                    <label class="d-block" for="user-photo">Photo</label>
-                                    <input type="file" 
-                                    id="user-photo" 
-                                    @change="uploadImage" 
-                                    :class="{ 'is-invalid': errors.photo }">
-                                    <p class="text-danger" v-if="errors.photo">{{ errors.photo[0] }}</p>
-                                </div>
-                                <div class="form-group" >
-                                    <label for="example-password-input">Password</label>
+                                    <label for="example-password-input"
+                                        >Password</label
+                                    >
                                     <input
                                         type="password"
                                         class="form-control"
                                         placeholder="Password"
                                         v-model="user.password"
-                                        :class="{ 'is-invalid': errors.password }"
+                                        :class="{
+                                            'is-invalid': errors.password
+                                        }"
                                     />
-                                    <p class="text-danger" v-if="errors.password">{{ errors.password[0] }}</p>
+                                    <p
+                                        class="text-danger"
+                                        v-if="errors.password"
+                                    >
+                                        {{ errors.password[0] }}
+                                    </p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="example-password-input">Re-type Pasword</label>
+                                    <label for="example-password-input"
+                                        >Re-type Pasword</label
+                                    >
                                     <input
                                         type="password"
                                         class="form-control"
                                         name="example-password-input"
                                         placeholder="Re-type Pasword"
                                         v-model="user.retypepassword"
-                                        :class="{ 'is-invalid': errors.retypepassword }"
+                                        :class="{
+                                            'is-invalid': errors.retypepassword
+                                        }"
                                     />
-                                    <p class="text-danger" v-if="errors.retypepassword">{{ errors.retypepassword[0] }}</p>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                                <!--TRO-->
-                                <div class="form-group font-size-sm">
-                                    <label class="d-block">Tenant Relation</label>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline1"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline1"
-                                        >Chief</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >TRO</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Customer Services</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Receptionist</label>
-                                    </div>
-                                </div>
-                                <!--OC-->
-                                <div class="form-group font-size-sm">
-                                    <label class="d-block">Outsource</label>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline1"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline1"
-                                        >Chief</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Housekeeping</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Landscape</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Parking</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Pest Control</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >HSE</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Security</label>
-                                    </div>
-                                </div>
-                                <!--GA-->
-                                <div class="form-group font-size-sm">
-                                    <label class="d-block">General Affair</label>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline1"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline1"
-                                        >Chief</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Storekeeper</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Purchasing</label>
-                                    </div>
-                                </div>
-                                <!--ENGINEERING-->
-                                <div class="form-group font-size-sm">
-                                    <label class="d-block">Engineering</label>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline1"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline1"
-                                        >Chief</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Civil Section</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Plumbing</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Mechanical Engineering</label>
-                                    </div>
-                                </div>
-                                <!--FINANCE-->
-                                <div class="form-group font-size-sm">
-                                    <label class="d-block">Finance</label>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline1"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline1"
-                                        >Chief</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Sales</label>
-                                    </div>
-                                </div>
-                                <!--ACCOUNTING-->
-                                <div class="form-group font-size-sm">
-                                    <label class="d-block">Accounting</label>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline1"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline1"
-                                        >Chief</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Staff Accounting</label>
-                                    </div>
-                                </div>
-                                <!--OTHER-->
-                                <div class="form-group font-size-sm">
-                                    <label class="d-block">Other Privileges</label>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline1"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline1"
-                                        >Administrator</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Building Managemenet</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            name="example-checkbox-inline2"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            for="example-checkbox-inline2"
-                                        >Developer</label>
-                                    </div>
+                                    <p
+                                        class="text-danger"
+                                        v-if="errors.retypepassword"
+                                    >
+                                        {{ errors.retypepassword[0] }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -446,9 +192,10 @@
                         <!-- Submit -->
                         <div class="row items-push">
                             <div class="col-12 text-center">
-                                <p
-                                    class="font-size-sm text-muted"
-                                >* Required filled, Make sure all data is correctly filled</p>
+                                <p class="font-size-sm text-muted">
+                                    * Required filled, Make sure all data is
+                                    correctly filled
+                                </p>
                                 <button
                                     type="submit"
                                     class="btn btn-sm btn-success"
@@ -462,9 +209,10 @@
                                     class="btn btn-sm btn-alt-light"
                                     tag="button"
                                     v-ripple="{ center: true }"
-                                    :to="{name: 'user'}"
+                                    :to="{ name: 'user' }"
                                 >
-                                    <i class="fa fa-fw fa-times mr-1"></i> Cancel
+                                    <i class="fa fa-fw fa-times mr-1"></i>
+                                    Cancel
                                 </router-link>
                             </div>
                         </div>
@@ -479,19 +227,19 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapState, mapMutations } from "vuex";
 
 export default {
     name: "create-user",
 
     data() {
         return {
-            loadingPage: 1,
+            loadingPage: 1
         };
     },
     computed: {
-        ...mapState(['errors']), //MENGAMBIL STATE ERRORS
-        ...mapState('user', {
+        ...mapState(["errors"]), //MENGAMBIL STATE ERRORS
+        ...mapState("user", {
             user: state => state.user
         })
     },
@@ -500,8 +248,8 @@ export default {
     },
     methods: {
         //VUEX
-        ...mapMutations('user', ['CLEAR_FORM']), 
-        ...mapActions('user', ['submitUser']),
+        ...mapMutations("user", ["CLEAR_FORM"]),
+        ...mapActions("user", ["submitUser"]),
         //SWAL
         alert(text, tipe) {
             if (tipe === 1) {
@@ -560,14 +308,14 @@ export default {
         submit() {
             this.doLoading(2);
             this.submitUser().then(() => {
-                this.$router.push({ name: 'user' })
-                this.alert("Successfully create User Data ",1 );
-            })
+                this.$router.push({ name: "user" });
+                this.alert("Successfully create User Data ", 1);
+            });
         }
     },
     destroyed() {
         //FORM DI BERSIHKAN
-        this.CLEAR_FORM()
+        this.CLEAR_FORM();
     }
 };
 </script>

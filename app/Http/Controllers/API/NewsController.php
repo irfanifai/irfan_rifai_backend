@@ -21,7 +21,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news = News::where('client_token', Auth::user()->client_token)->with('user');
+        $news = News::with('user')->orderBy(request()->sort, request()->asc);
         if (request()->search != '') {
             $news = $news->where(function ($query) {
                 return $query->where('news_title', 'LIKE', '%' . request()->search . '%')
@@ -31,19 +31,18 @@ class NewsController extends Controller
         if (request()->rows == 'All'){
             request()->rows = intval(News::count());
         }
-        return new NewsCollection($news->orderBy(request()->sort, request()->asc)->paginate(request()->rows));
+        return new NewsCollection($news->paginate(request()->rows));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'news_title' => 'required|string|unique:admin_news,news_title',
+            'news_title' => 'required|string',
             'news_content' => 'required|string',
         ]);
 
         $request->merge([
             'news_username' => Auth::user()->username,
-            'client_token' => Auth::user()->client_token
         ]);
 
         News::create($request->all());
@@ -52,13 +51,13 @@ class NewsController extends Controller
 
     public function edit($id)
     {
-        $news = News::where('client_token', Auth::user()->client_token)->whereId($id)->first();
+        $news = News::whereId($id)->first();
         return response()->json(['status' => 'success', 'data' => $news], 200);
     }
 
     public function update(Request $request, $id)
     {
-        $news = News::where('client_token', Auth::user()->client_token)->whereId($id)->first();
+        $news = News::whereId($id)->first();
 
         $this->validate($request, [
             'news_title' => 'required|string',
@@ -71,9 +70,9 @@ class NewsController extends Controller
 
     public function destroy($id)
     {
-        $news = News::where('client_token', Auth::user()->client_token)->whereId($id)->first();
+        $news = News::whereId($id)->first();
         $news->delete();
         return response()->json(['status' => 'success'], 200);
     }
-    
+
 }

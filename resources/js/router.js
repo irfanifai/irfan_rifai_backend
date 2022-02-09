@@ -5,7 +5,6 @@ import store from "./store.js";
 //PAGE
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
-
 //USER
 import User from "./views/admin/user/User.vue";
 import UserCreate from "./views/admin/user/Create.vue";
@@ -14,14 +13,6 @@ import UserEdit from "./views/admin/user/Edit.vue";
 import News from "./views/admin/news/News.vue";
 import NewsCreate from "./views/admin/news/Create.vue";
 import NewsEdit from "./views/admin/news/Edit.vue";
-//SIGNATURE
-import Signature from "./views/admin/signature/Signature.vue";
-import SignatureCreate from "./views/admin/signature/Create.vue";
-import SignatureEdit from "./views/admin/signature/Edit.vue";
-//BANK
-import Bank from "./views/admin/bank/Bank.vue";
-import BankCreate from "./views/admin/bank/Create.vue";
-import BankEdit from "./views/admin/bank/Edit.vue";
 
 Vue.use(VueRouter);
 
@@ -75,48 +66,12 @@ const router = new VueRouter({
             component: NewsEdit,
             meta: { requiresAuth: true }
         },
-        {
-            path: "/signature",
-            name: "signature",
-            component: Signature,
-            meta: { requiresAuth: true }
-        },
-        {
-            path: "/signature/create",
-            name: "signature-create",
-            component: SignatureCreate,
-            meta: { requiresAuth: true }
-        },
-        {
-            path: "/signature/edit",
-            name: "signature-edit",
-            component: SignatureEdit,
-            meta: { requiresAuth: true }
-        },
-        {
-            path: "/bank",
-            name: "bank",
-            component: Bank,
-            meta: { requiresAuth: true }
-        },
-        {
-            path: "/bank/create",
-            name: "bank-create",
-            component: BankCreate,
-            meta: { requiresAuth: true }
-        },
-        {
-            path: "/bank/edit",
-            name: "bank-edit",
-            component: BankEdit,
-            meta: { requiresAuth: true }
-        },
     ]
 });
 
 //Navigation Guards
 router.beforeEach((to, from, next) => {
-    store.commit('CLEAR_ERRORS') 
+    store.commit('CLEAR_ERRORS')
     if (to.matched.some(record => record.meta.requiresAuth)) {
         let auth = store.getters.isAuth;
         if (!auth) {
