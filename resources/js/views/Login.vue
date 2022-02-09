@@ -11,11 +11,6 @@
                             <div class="col-md-8 col-lg-6 col-xl-4 py-4">
                                 <!-- Header -->
                                 <div class="text-center">
-                                    <p class="mb-2">
-                                        <i
-                                            class="fa-2x fab fa-think-peaks text-primary"
-                                        ></i>
-                                    </p>
                                     <h1 class="h4 mb-1">
                                         Sign In
                                     </h1>
@@ -78,36 +73,6 @@
                                         >
                                             {{ errors.invalid }}
                                         </p>
-                                        <div class="form-group">
-                                            <div
-                                                class="d-md-flex align-items-md-center justify-content-md-between"
-                                            >
-                                                <div
-                                                    class="custom-control custom-switch"
-                                                >
-                                                    <input
-                                                        type="checkbox"
-                                                        class="custom-control-input"
-                                                        id="login-remember"
-                                                        v-model="
-                                                            data.remember_me
-                                                        "
-                                                    />
-                                                    <label
-                                                        class="custom-control-label font-w400"
-                                                        for="login-remember"
-                                                        >Remember Me</label
-                                                    >
-                                                </div>
-                                                <div class="py-2">
-                                                    <a
-                                                        class="font-size-sm"
-                                                        href="op_auth_reminder2.html"
-                                                        >Forgot Password?</a
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div
                                         class="form-group row justify-content-center mb-0"
@@ -152,7 +117,8 @@
 
                 <!-- Footer -->
                 <div class="font-size-sm text-center text-muted py-3">
-                    <a href="irfanrifai.com"><strong>irfanrifai.com</strong></a> &copy;
+                    <strong>irfanrifai.com</strong>
+                    &copy;
                     <span data-toggle="year-copy">2022</span>
                 </div>
                 <!-- END Footer -->

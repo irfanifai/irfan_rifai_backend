@@ -132,58 +132,6 @@
                                         </router-link>
                                     </li>
                                     <li class="nav-main-item">
-                                        <router-link
-                                            class="nav-main-link"
-                                            :to="{ name: 'category' }"
-                                        >
-                                            <i
-                                                class="nav-main-link-icon  fa fa-briefcase"
-                                            ></i>
-                                            <span class="nav-main-link-name"
-                                                >Category</span
-                                            >
-                                        </router-link>
-                                    </li>
-                                    <li class="nav-main-item">
-                                        <router-link
-                                            class="nav-main-link"
-                                            :to="{ name: 'about' }"
-                                        >
-                                            <i
-                                                class="nav-main-link-icon fas fa-info"
-                                            ></i>
-                                            <span class="nav-main-link-name"
-                                                >About Us</span
-                                            >
-                                        </router-link>
-                                    </li>
-                                    <!-- <li class="nav-main-item">
-                                        <router-link
-                                            class="nav-main-link"
-                                            :to="{ name: 'news' }"
-                                        >
-                                            <i
-                                                class="nav-main-link-icon far fa-comment-alt"
-                                            ></i>
-                                            <span class="nav-main-link-name"
-                                                >Message</span
-                                            >
-                                        </router-link>
-                                    </li> -->
-                                    <li class="nav-main-item">
-                                        <router-link
-                                            class="nav-main-link"
-                                            :to="{ name: 'info' }"
-                                        >
-                                            <i
-                                                class="nav-main-link-icon fas fa-cog"
-                                            ></i>
-                                            <span class="nav-main-link-name"
-                                                >Info</span
-                                            >
-                                        </router-link>
-                                    </li>
-                                    <li class="nav-main-item">
                                         <button
                                             class="nav-main-link"
                                             @click="logout()"
@@ -233,7 +181,6 @@
 
 <script>
 import "../../../public/css/oneui.css";
-import "../../../public/css/aurora.css";
 import "../../../public/css/themes/modern.min.css";
 
 import { mapState, mapMutations } from "vuex";
