@@ -7,7 +7,7 @@
                     class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
                 >
                     <h1 class="flex-sm-fill h3 my-2">
-                        Administrator : Create User
+                        Administrator : Edit User
                     </h1>
                     <nav
                         class="flex-sm-00-auto ml-sm-3"
@@ -63,7 +63,7 @@
                     ></div>
                     <center class="mt-2">
                         <span class="text-center" style="opacity:0.7"
-                            >Save Data</span
+                            >Update Data</span
                         >
                     </center>
                 </div>
@@ -82,12 +82,12 @@
                             <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
                                     <label for="example-text-input"
-                                        >Full Name</label
+                                        >Fullname</label
                                     >
                                     <input
                                         type="text"
                                         class="form-control"
-                                        placeholder="Full Name"
+                                        placeholder="Input Fullname"
                                         v-model="user.name"
                                         :class="{ 'is-invalid': errors.name }"
                                     />
@@ -123,7 +123,7 @@
                                     <input
                                         type="email"
                                         class="form-control"
-                                        placeholder="Email Address"
+                                        placeholder="Input Email"
                                         v-model="user.email"
                                         :class="{ 'is-invalid': errors.email }"
                                     />
@@ -132,6 +132,24 @@
                                     </p>
                                 </div>
                                 <div class="form-group">
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-outline-primary btn-icon"
+                                        v-ripple="{ center: true }"
+                                        @click="changePhoto"
+                                    >
+                                        Change Photo
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-outline-primary btn-icon ml-1"
+                                        v-ripple="{ center: true }"
+                                        @click="resetPassword"
+                                    >
+                                        Reset Password
+                                    </button>
+                                </div>
+                                <div class="form-group" v-if="changePhotoVal">
                                     <label class="d-block" for="user-photo"
                                         >Photo</label
                                     >
@@ -145,14 +163,14 @@
                                         {{ errors.photo[0] }}
                                     </p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" v-if="resetPasswordVal">
                                     <label for="example-password-input"
                                         >Password</label
                                     >
                                     <input
                                         type="password"
                                         class="form-control"
-                                        placeholder="Password"
+                                        placeholder="Input Password"
                                         v-model="user.password"
                                         :class="{
                                             'is-invalid': errors.password
@@ -165,7 +183,7 @@
                                         {{ errors.password[0] }}
                                     </p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" v-if="resetPasswordVal">
                                     <label for="example-password-input"
                                         >Re-type Pasword</label
                                     >
@@ -200,9 +218,18 @@
                                     type="submit"
                                     class="btn btn-sm btn-success"
                                     v-ripple="{ center: true }"
-                                    @click.prevent="submit"
+                                    @click.prevent="submitData"
                                 >
                                     <i class="fa fa-fw fa-check mr-1"></i> Save
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-danger"
+                                    v-ripple="{ center: true }"
+                                    @click.prevent="deleteData"
+                                >
+                                    <i class="fa fa-fw fa-trash mr-1"></i>
+                                    Delete
                                 </button>
                                 <router-link
                                     type="button"
@@ -230,11 +257,20 @@
 import { mapActions, mapState, mapMutations } from "vuex";
 
 export default {
-    name: "create-user",
-
+    name: "edit-user",
+    created() {
+        if (this.$route.params.username) {
+            this.editUser(this.$route.params.username);
+        } else {
+            this.$router.push({ name: "user" });
+            this.alert("Data not found, select data first", 2);
+        }
+    },
     data() {
         return {
-            loadingPage: 1
+            loadingPage: 1,
+            resetPasswordVal: false,
+            changePhotoVal: false
         };
     },
     computed: {
@@ -244,12 +280,12 @@ export default {
         })
     },
     mounted() {
-        this.doLoading(0);
+        this.doLoading(1);
     },
     methods: {
         //VUEX
         ...mapMutations("user", ["CLEAR_FORM"]),
-        ...mapActions("user", ["submitUser"]),
+        ...mapActions("user", ["editUser", "updateUser", "removeUser"]),
         //SWAL
         alert(text, tipe) {
             if (tipe === 1) {
@@ -295,7 +331,7 @@ export default {
             this.loadingPage = type;
             setTimeout(() => {
                 this.loadingPage = 0;
-            }, 500);
+            }, 400);
         },
         uploadImage(e) {
             let file = e.target.files[0];
@@ -305,11 +341,42 @@ export default {
             };
             reader.readAsDataURL(file);
         },
-        submit() {
+        resetPassword() {
+            this.resetPasswordVal = !this.resetPasswordVal;
+        },
+        changePhoto() {
+            this.changePhotoVal = !this.changePhotoVal;
+        },
+        submitData() {
             this.doLoading(2);
-            this.submitUser().then(() => {
+            this.updateUser(this.$route.params.username).then(() => {
                 this.$router.push({ name: "user" });
-                this.alert("Successfully create User Data ", 1);
+                this.alert("Successfully Edit User Data", 1);
+                this.loadingPage = 0;
+            });
+        },
+        deleteData() {
+            //AKAN MENAMPILKAN JENDELA KONFIRMASI
+            this.$swal({
+                title: "Are you sure ?",
+                text: "Deleted data cannot be recovery",
+                icon: "warning",
+                buttons: ["Cancel", "Delete"],
+                dangerMode: true
+            }).then(willDelete => {
+                if (willDelete) {
+                    this.removeUser(this.$route.params.username)
+                        .then(() => {
+                            this.$router.push({ name: "user" });
+                            this.alert("Data has been deleted !", 1);
+                            this.loadingPage = 0;
+                        })
+                        .catch(error => {
+                            if (error) {
+                                console.log(error);
+                            }
+                        });
+                }
             });
         }
     },

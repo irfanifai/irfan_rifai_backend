@@ -21,7 +21,6 @@ class UserController extends Controller
 
     public function index()
     {
-        // dd(Auth::user()->client_token);
         $users = User::where('client_token', Auth::user()->client_token);
         if (request()->search != '') {
             $users = $users->where(function ($query) {
@@ -38,7 +37,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // dd(Auth::user()->client_token);
         $this->validate($request, [
             'name' => 'required',
             'username' => 'required|string|unique:users,username',
@@ -51,7 +49,7 @@ class UserController extends Controller
 
         //PHOTO UPLOAD
         $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
-        // \Image::make($request->photo)->save($this->path.$name);
+        \Image::make($request->photo)->save($this->path.$name);
         $request->merge([
             'photo' => $name,
             'client_token' => Auth::user()->client_token

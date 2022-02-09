@@ -82,12 +82,12 @@
                             <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
                                     <label for="example-text-input"
-                                        >Fullname</label
+                                        >Full Name</label
                                     >
                                     <input
                                         type="text"
                                         class="form-control"
-                                        placeholder="Input Fullname"
+                                        placeholder="Input Full Name"
                                         v-model="user.name"
                                         :class="{ 'is-invalid': errors.name }"
                                     />

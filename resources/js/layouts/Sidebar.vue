@@ -24,7 +24,7 @@
                                     ></i>
                                     <span class="smini-hide">
                                         <span class="font-w700 font-size-h5"
-                                            >Wafa</span
+                                            >WaVa</span
                                         >
                                     </span>
                                 </router-link>
@@ -51,7 +51,6 @@
                             <!-- Side Navigation -->
                             <div class="content-side content-side-full">
                                 <ul class="nav-main">
-                                    <!--Dashboard-->
                                     <li class="nav-main-item">
                                         <router-link
                                             class="nav-main-link d-lg-none"
@@ -79,11 +78,6 @@
                                                 >Dashboard</span
                                             >
                                         </router-link>
-                                    </li>
-
-                                    <!--Administrator-->
-                                    <li class="nav-main-heading">
-                                        Administrator
                                     </li>
                                     <li class="nav-main-item">
                                         <router-link
@@ -137,68 +131,33 @@
                                             >
                                         </router-link>
                                     </li>
-
-                                    <!--Artikel-->
-                                    <li class="nav-main-heading">
-                                        Artikel
-                                    </li>
                                     <li class="nav-main-item">
                                         <router-link
                                             class="nav-main-link"
-                                            :to="{ name: 'news' }"
-                                        >
-                                            <i
-                                                class="nav-main-link-icon far fa-file-alt"
-                                            ></i>
-                                            <span class="nav-main-link-name"
-                                                >Semua Artikel</span
-                                            >
-                                        </router-link>
-                                    </li>
-                                    <li class="nav-main-item">
-                                        <router-link
-                                            class="nav-main-link"
-                                            :to="{ name: 'news' }"
-                                        >
-                                            <i
-                                                class="nav-main-link-icon far fa-envelope-open"
-                                            ></i>
-                                            <span class="nav-main-link-name"
-                                                >Buat Artikel</span
-                                            >
-                                        </router-link>
-                                    </li>
-                                    <li class="nav-main-item">
-                                        <router-link
-                                            class="nav-main-link"
-                                            :to="{ name: 'news' }"
+                                            :to="{ name: 'category' }"
                                         >
                                             <i
                                                 class="nav-main-link-icon  fa fa-briefcase"
                                             ></i>
                                             <span class="nav-main-link-name"
-                                                >Kategori Artikel</span
+                                                >Category</span
                                             >
                                         </router-link>
                                     </li>
-
-                                    <li class="nav-main-heading"></li>
-                                    <!--Tentang Kami-->
                                     <li class="nav-main-item">
                                         <router-link
                                             class="nav-main-link"
-                                            :to="{ name: 'news' }"
+                                            :to="{ name: 'about' }"
                                         >
                                             <i
                                                 class="nav-main-link-icon fas fa-info"
                                             ></i>
                                             <span class="nav-main-link-name"
-                                                >Tentang Kami</span
+                                                >About Us</span
                                             >
                                         </router-link>
                                     </li>
-                                    <!--Pesan-->
-                                    <li class="nav-main-item">
+                                    <!-- <li class="nav-main-item">
                                         <router-link
                                             class="nav-main-link"
                                             :to="{ name: 'news' }"
@@ -207,27 +166,23 @@
                                                 class="nav-main-link-icon far fa-comment-alt"
                                             ></i>
                                             <span class="nav-main-link-name"
-                                                >Pesan</span
+                                                >Message</span
                                             >
                                         </router-link>
-                                    </li>
-                                    <!--Pengaturan Footer-->
+                                    </li> -->
                                     <li class="nav-main-item">
                                         <router-link
                                             class="nav-main-link"
-                                            :to="{ name: 'news' }"
+                                            :to="{ name: 'info' }"
                                         >
                                             <i
                                                 class="nav-main-link-icon fas fa-cog"
                                             ></i>
                                             <span class="nav-main-link-name"
-                                                >Pengaturan Footer</span
+                                                >Info</span
                                             >
                                         </router-link>
                                     </li>
-
-                                    <!--Logout-->
-                                    <li class="nav-main-heading"></li>
                                     <li class="nav-main-item">
                                         <button
                                             class="nav-main-link"

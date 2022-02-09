@@ -16,7 +16,7 @@ class NewsController extends Controller
     public function __construct()
     {
         //DEFINISIKAN PATH
-        // $this->path = storage_path('app/public/avatar/');
+        $this->path = storage_path('app/public/avatar/');
     }
 
     public function index()

@@ -148,7 +148,7 @@
                                         @click="sortBy('updated_at')"
                                         style="width: 15%;"
                                     >
-                                        Last Updated
+                                        Last Login
                                         <i
                                             class="fa fa-sort sort-icon"
                                             v-bind:class="{
@@ -225,6 +225,14 @@
                             Swipe left here to see full column >>
                         </p>
                     </div>
+
+                    <!-- <div class="text-center" v-if="users.meta.last_page">
+                        <v-pagination
+                            v-model="page"
+                            :length="users.meta.last_page"
+                            :total-visible="6"
+                        ></v-pagination>
+                    </div> -->
 
                     <paginate
                         v-model="page"
