@@ -46,7 +46,24 @@ const actions = {
                     }
                 });
         });
-    }
+    },
+    submitRegister({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            $axios
+                .post(`/register`, payload)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error);
+                    if (error.response.status === 422) {
+                        commit("SET_ERRORS", error.response.data.errors, {
+                            root: true
+                        });
+                    }
+                });
+        });
+    },
 };
 
 export default {

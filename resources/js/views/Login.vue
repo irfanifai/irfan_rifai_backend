@@ -106,6 +106,24 @@
                                                 ></div>
                                             </div>
                                         </div>
+
+
+                                    </div>
+                                    <div
+                                        class="form-group row justify-content-center mb-0"
+                                    >
+                                        <div class="col-md-12 col-xl-5">
+                                            <router-link
+                                                class="
+                                                    text-primary
+                                                    font-size-sm
+                                                "
+                                                :to="{
+                                                    name: 'register'
+                                                }"
+                                                >Register
+                                            </router-link>
+                                        </div>
                                     </div>
                                 </form>
                                 <!-- END Sign In Form -->

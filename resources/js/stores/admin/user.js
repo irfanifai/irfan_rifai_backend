@@ -27,13 +27,13 @@ const mutations = {
     },
     ASSIGN_FORM(state, payload) {
         state.user = {
-            name: payload.name,
-            email: payload.email,
-            username: payload.username,
-            phone: payload.phone,
-            password: payload.password,
-            retypepassword: payload.retypepassword,
-            photo: payload.photo
+            name: payload.user.name,
+            email: payload.user.email,
+            username: payload.user.username,
+            phone: payload.user.phone,
+            password: payload.user.password,
+            retypepassword: payload.user.retypepassword,
+            photo: payload.user.photo
         }
     },
     CLEAR_FORM(state) {
@@ -71,18 +71,35 @@ const actions = {
                 })
         })
     },
+    // submitUser({ dispatch, commit, state }) {
+    //     return new Promise((resolve, reject) => {
+    //         $axios.post(`/users`, state.user)
+    //             .then((response) => {
+    //                 resolve(response.data)
+    //             })
+    //             .catch((error) => {
+    //                 if (error.response.status === 422) {
+    //                     commit('SET_ERRORS', error.response.data.errors, { root: true })
+    //                 }
+    //             })
+    //     })
+    // },
     submitUser({ dispatch, commit, state }) {
         return new Promise((resolve, reject) => {
-            $axios.post(`/users`, state.user)
-                .then((response) => {
-                    resolve(response.data)
+            $axios
+                .post(`/users`, state.user)
+                .then(response => {
+                    resolve(response.data);
                 })
-                .catch((error) => {
+                .catch(error => {
+                    reject(error);
                     if (error.response.status === 422) {
-                        commit('SET_ERRORS', error.response.data.errors, { root: true })
+                        commit("SET_ERRORS", error.response.data.errors, {
+                            root: true
+                        });
                     }
-                })
-        })
+                });
+        });
     },
     editUser({ commit }, payload) {
         return new Promise((resolve, reject) => {

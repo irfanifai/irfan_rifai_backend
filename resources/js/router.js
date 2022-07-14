@@ -5,6 +5,10 @@ import store from "./store.js";
 //PAGE
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
+import Register from "./views/auth/Register.vue";
+// import LoginForbidden from "./views/auth/LoginForbidden.vue";
+// import ForgotPassword from "./views/auth/ForgotPassword.vue";
+// import ResetPassword from "./views/auth/ResetPassword.vue";
 //USER
 import User from "./views/admin/user/User.vue";
 import UserCreate from "./views/admin/user/Create.vue";
@@ -20,15 +24,35 @@ const router = new VueRouter({
     mode: "history",
     routes: [
         {
+            path: "/login",
+            name: "login",
+            component: Login
+        },
+        {
+            path: "/register",
+            name: "register",
+            component: Register
+        },
+        // {
+        //     path: "/login/forbidden",
+        //     name: "login-forbidden",
+        //     component: LoginForbidden
+        // },
+        // {
+        //     path: "/forgot-password",
+        //     name: "forgot-password",
+        //     component: ForgotPassword
+        // },
+        // {
+        //     path: "/reset-password",
+        //     name: "reset-password",
+        //     component: ResetPassword
+        // },
+        {
             path: "/",
             name: "home",
             component: Home,
             meta: { requiresAuth: true }
-        },
-        {
-            path: "/login",
-            name: "login",
-            component: Login
         },
         {
             path: "/user",

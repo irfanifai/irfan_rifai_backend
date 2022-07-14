@@ -192,10 +192,6 @@
                         <!-- Submit -->
                         <div class="row items-push">
                             <div class="col-12 text-center">
-                                <p class="font-size-sm text-muted">
-                                    * Required filled, Make sure all data is
-                                    correctly filled
-                                </p>
                                 <button
                                     type="submit"
                                     class="btn btn-sm btn-success"
@@ -249,6 +245,7 @@ export default {
     methods: {
         ...mapMutations("user", ["CLEAR_FORM"]),
         ...mapActions("user", ["submitUser"]),
+        ...mapMutations(["CLEAR_ERRORS"]),
         doLoading(type) {
             this.loadingPage = type;
             setTimeout(() => {
@@ -265,9 +262,21 @@ export default {
         },
         submit() {
             this.doLoading(2);
+            this.CLEAR_ERRORS();
             this.submitUser().then(() => {
                 this.$router.push({ name: "user" });
                 this.alert("Successfully create User Data ", 1);
+                this.loadingPage = 0;
+            })
+            .catch(error => {
+                console.log(error);
+                error.response.status == 500
+                    ? this.alert(error.response.data.message, 2)
+                    : "";
+                error.response.status != 422 && error.response.status != 500
+                    ? this.alert(error.message, 2)
+                    : "";
+                this.loadingPage = 0;
             });
         }
     },
