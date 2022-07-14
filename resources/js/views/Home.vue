@@ -42,7 +42,7 @@
                                 <div
                                     class="font-size-sm font-w600 text-uppercase text-muted"
                                 >
-                                    User Admin
+                                    User
                                 </div>
                                 <div class="font-size-h2 font-w400 text-dark">
                                     {{ dashboard.countUser }}

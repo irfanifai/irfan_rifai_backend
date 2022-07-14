@@ -69,7 +69,7 @@
                 </div>
             </div>
             <!-- Basic -->
-            <div class="block" v-if="loadingPage == 0">
+            <div class="block" v-if="loadingPage == 0 &&  auth.data.name == news.news_username">
                 <div class="block-content block-content-full">
                     <form
                         action="be_forms_elements.html"
@@ -187,6 +187,42 @@
                     </form>
                 </div>
             </div>
+
+            <div class="block" v-else>
+                <div class="block-content block-content-full">
+                    <div class="row font-size-sm">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="example-text-input"
+                                        >News Title :</label
+                                    >
+                                    <p v-html="news.news_title"></p>
+                                </div>
+                                <div class="form-group" v-if="news.photo">
+                                    <label for="example-text-input"
+                                        >Foto :</label
+                                    ><br>
+                                    <img
+                                        :src="'/storage/news/' + news.photo"
+                                        alt="foto"
+                                        class="img-thumbnail"
+                                        style="
+                                            width: 200px;
+                                            height: 200px;
+                                            object-fit: cover;
+                                        "
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="example-text-input"
+                                        >News Content :</label
+                                    >
+                                    <p v-html="news.news_content"></p>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
             <!-- END Basic -->
         </div>
         <!-- END Page Content -->
@@ -216,6 +252,7 @@ export default {
     },
     computed: {
         ...mapState(["errors"]),
+        ...mapState(["auth"]),
         ...mapState("news", {
             news: state => state.news
         })

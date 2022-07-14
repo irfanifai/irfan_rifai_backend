@@ -80,20 +80,6 @@
                                 placeholder="Search.."
                                 v-model="search"
                             />
-                            <!-- <button
-                                type="button"
-                                class="btn btn-sm btn-success btn-icon float-right m-1"
-                                v-ripple="{ center: true }"
-                            >
-                                <i class="fa fa-file-excel"></i>
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-sm btn-danger btn-icon float-right m-1"
-                                v-ripple="{ center: true }"
-                            >
-                                <i class="fa fa-file-pdf"></i>
-                            </button> -->
                             <router-link
                                 type="button"
                                 class="btn btn-sm btn-info float-right m-1"
@@ -179,7 +165,6 @@
                                     <td class="font-size-sm">
                                         {{ news.news_title }}
                                     </td>
-                                    <!-- <td class="font-size-sm">{{news.news_content | truncate(50, '...')}}</td> -->
                                     <td class="font-size-sm">
                                         {{
                                             news.user != null
