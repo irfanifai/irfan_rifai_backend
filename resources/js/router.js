@@ -6,9 +6,9 @@ import store from "./store.js";
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import Register from "./views/auth/Register.vue";
-// import LoginForbidden from "./views/auth/LoginForbidden.vue";
-// import ForgotPassword from "./views/auth/ForgotPassword.vue";
-// import ResetPassword from "./views/auth/ResetPassword.vue";
+import LoginForbidden from "./views/auth/LoginForbidden.vue";
+import ForgotPassword from "./views/auth/ForgotPassword.vue";
+import ResetPassword from "./views/auth/ResetPassword.vue";
 //USER
 import User from "./views/admin/user/User.vue";
 import UserCreate from "./views/admin/user/Create.vue";
@@ -33,21 +33,21 @@ const router = new VueRouter({
             name: "register",
             component: Register
         },
-        // {
-        //     path: "/login/forbidden",
-        //     name: "login-forbidden",
-        //     component: LoginForbidden
-        // },
-        // {
-        //     path: "/forgot-password",
-        //     name: "forgot-password",
-        //     component: ForgotPassword
-        // },
-        // {
-        //     path: "/reset-password",
-        //     name: "reset-password",
-        //     component: ResetPassword
-        // },
+        {
+            path: "/login/forbidden",
+            name: "login-forbidden",
+            component: LoginForbidden
+        },
+        {
+            path: "/forgot-password",
+            name: "forgot-password",
+            component: ForgotPassword
+        },
+        {
+            path: "/reset-password",
+            name: "reset-password",
+            component: ResetPassword
+        },
         {
             path: "/",
             name: "home",

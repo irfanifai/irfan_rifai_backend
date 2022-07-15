@@ -74,6 +74,52 @@
                                             {{ errors.invalid }}
                                         </p>
                                     </div>
+                                    <!-- Forget Password -->
+                                    <div class="form-group pb-3">
+                                        <div
+                                            class="
+                                                    d-md-flex
+                                                    align-items-md-center
+                                                    justify-content-md-between
+                                                "
+                                        >
+                                            <div
+                                                class="
+                                                        custom-control
+                                                        custom-switch
+                                                    "
+                                            >
+                                                <router-link
+                                                    class="
+                                                        text-muted
+                                                        font-size-sm
+                                                    "
+                                                    :to="{
+                                                        name: 'forgot-password'
+                                                    }"
+                                                    >Lupa Password
+                                                </router-link>
+                                            </div>
+
+                                            <div
+                                                class="
+                                                        custom-control
+                                                        custom-switch
+                                                    "
+                                            >
+                                                <router-link
+                                                    class="
+                                                        text-muted
+                                                        font-size-sm
+                                                    "
+                                                    :to="{
+                                                        name: 'register'
+                                                    }"
+                                                    >Register
+                                                </router-link>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div
                                         class="form-group row justify-content-center mb-0"
                                     >
@@ -108,22 +154,6 @@
                                         </div>
 
 
-                                    </div>
-                                    <div
-                                        class="form-group row justify-content-center mb-0"
-                                    >
-                                        <div class="col-md-12 col-xl-5">
-                                            <router-link
-                                                class="
-                                                    text-primary
-                                                    font-size-sm
-                                                "
-                                                :to="{
-                                                    name: 'register'
-                                                }"
-                                                >Register
-                                            </router-link>
-                                        </div>
                                     </div>
                                 </form>
                                 <!-- END Sign In Form -->

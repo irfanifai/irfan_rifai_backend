@@ -15,7 +15,6 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        //DEFINISIKAN PATH
         $this->path = storage_path('app/public/avatar/');
     }
 
@@ -44,10 +43,9 @@ class UserController extends Controller
             'photo' => 'required',
             'password' => 'required'
         ]);
-        //PASSWORD HASH
+
         $request['password'] = bcrypt($request->get('password'));
 
-        //PHOTO UPLOAD
         $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
         \Image::make($request->photo)->save($this->path.$name);
         $request->merge([
@@ -74,12 +72,11 @@ class UserController extends Controller
             'username' => 'required|string|unique:users,username,'.$user->id,
             'email' => 'required|string|unique:users,email,'.$user->id,
         ]);
-        //PASSWORD HASH
+
         if($request['password']){
             $request['password'] = bcrypt($request->get('password'));
         }
 
-        //PHOTO UPLOAD
         if ($request->photo != $user->photo) {
             $name = time().'.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
             \Image::make($request->photo)->save($this->path.$name);
@@ -94,6 +91,7 @@ class UserController extends Controller
     {
         $user = User::where('client_token', Auth::user()->client_token)->whereUsername($username)->first();
         $user->delete();
+
         return response()->json(['status' => 'success'], 200);
     }
 

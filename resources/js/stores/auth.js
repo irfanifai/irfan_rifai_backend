@@ -64,6 +64,108 @@ const actions = {
                 });
         });
     },
+    verifRegister({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            $axios
+                .post(`/register/verification`, payload)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error);
+                    if (error.response.status === 422) {
+                        commit("SET_ERRORS", error.response.data.errors, {
+                            root: true
+                        });
+                    }
+                });
+        });
+    },
+    resendVerifRegister({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            $axios
+                .post(`/register/resend-verification`, payload)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error);
+                    if (error.response.status === 422) {
+                        commit("SET_ERRORS", error.response.data.errors, {
+                            root: true
+                        });
+                    }
+                });
+        });
+    },
+    submitForgetPassword({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            $axios
+                .post("/forgot-password", payload)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error);
+                    if (error.response.status == 422) {
+                        commit("SET_ERRORS", error.response.data.errors, {
+                            root: true
+                        });
+                    }
+                });
+        });
+    },
+    resendForgetPassword({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            $axios
+                .post(`/forgot-password/resend-link`, payload)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error);
+                    if (error.response.status === 422) {
+                        commit("SET_ERRORS", error.response.data.errors, {
+                            root: true
+                        });
+                    }
+                });
+        });
+    },
+    submitResetPassword({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            $axios
+                .post("/reset-password", payload)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error);
+                    if (error.response.status == 422) {
+                        commit("SET_ERRORS", error.response.data.errors, {
+                            root: true
+                        });
+                    }
+                });
+        });
+    },
+    verifResetPassword({ commit }, payload) {
+        return new Promise((resolve, reject) => {
+            $axios
+                .post(`/reset-password/verification`, payload)
+                .then(response => {
+                    resolve(response.data);
+                })
+                .catch(error => {
+                    reject(error);
+                    if (error.response.status === 422) {
+                        commit("SET_ERRORS", error.response.data.errors, {
+                            root: true
+                        });
+                    }
+                });
+        });
+    },
 };
 
 export default {
